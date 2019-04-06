@@ -1,0 +1,44 @@
+<h4>Formularios <small>template</small></h4>
+<hr>
+<form (ngSubmit)="save(form)" #form="ngForm" novalidate="">
+
+    <div>
+
+        <div class="form-group row">
+            <label class="col-2 col-form-label">Name</label>
+            <div class="col-8">
+
+                <input class="form-control" minlength="5" type="text" placeholder="Name" [(ngModel)]="user.name" name="name" required>
+                <div>
+
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group row">
+            <label class="col-2 col-form-label">Last name</label>
+            <div class="col-8">
+
+                <input class="form-control" type="text" placeholder="Last name" [(ngModel)]="user.lastName" name="lastname" required>
+            </div>
+        </div>
+    </div>
+    <div class="form-group row">
+        <label class="col-2 col-form-label">Email</label>
+        <div class="col-md-8">
+
+            <input class="form-control" type="email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$" required placeholder="Email" [(ngModel)]="user.email" name="email">
+        </div>
+    </div>
+
+
+
+    <div class="form-group row">
+        <label class="col-2 col-form-label">&nbsp;</label>
+        <div class="input-group col-md-8">
+            <button type="submit" class="btn btn-outline-primary">
+        Guardar
+      </button>
+        </div>
+    </div>
+</form>
