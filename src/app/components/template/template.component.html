@@ -4,13 +4,16 @@
 
     <div>
 
-        <div class="form-group row">
+        <div class="form-group row ">
             <label class="col-2 col-form-label">Name</label>
             <div class="col-8">
 
-                <input class="form-control" minlength="5" type="text" placeholder="Name" [(ngModel)]="user.name" name="name" required>
-                <div>
-
+                <input class="form-control is-invalid" [ngClass]="{'is-invalid': (name.errors?.required || name.errors?.minlength) && name.touched}" minlength="5" #name="ngModel" type="text" placeholder="Name" [(ngModel)]="user.name" name="name" required>
+                <div class="invalid-feedback" *ngIf="name.errors?.required">
+                    This field is required
+                </div>
+                <div class="invalid-feedback" *ngIf="name.errors?.minlength">
+                    at least 5 character
                 </div>
             </div>
         </div>
@@ -19,7 +22,10 @@
             <label class="col-2 col-form-label">Last name</label>
             <div class="col-8">
 
-                <input class="form-control" type="text" placeholder="Last name" [(ngModel)]="user.lastName" name="lastname" required>
+                <input class="form-control" type="text" placeholder="Last name" #lastName="ngModel" [(ngModel)]="user.lastName" name="lastname" required>
+                <div *ngIf="lastName.errors?.required">
+                    This field is required
+                </div>
             </div>
         </div>
     </div>
@@ -27,7 +33,13 @@
         <label class="col-2 col-form-label">Email</label>
         <div class="col-md-8">
 
-            <input class="form-control" type="email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$" required placeholder="Email" [(ngModel)]="user.email" name="email">
+            <input class="form-control" type="email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$" #email="ngModel" required placeholder="Email" [(ngModel)]="user.email" name="email">
+            <div *ngIf="email.errors?.required">
+                This field is required
+            </div>
+            <div *ngIf="email.errors?.pattern">
+                pattern
+            </div>
         </div>
     </div>
 
@@ -36,8 +48,8 @@
     <div class="form-group row">
         <label class="col-2 col-form-label">&nbsp;</label>
         <div class="input-group col-md-8">
-            <button type="submit" class="btn btn-outline-primary">
-        Guardar
+            <button type="submit" [disabled]="!form.valid" class="btn btn-outline-primary">
+        Save
       </button>
         </div>
     </div>
